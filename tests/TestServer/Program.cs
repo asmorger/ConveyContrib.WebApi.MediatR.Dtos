@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace TestServer
 {
-    internal class Program
+    public class Program
     {
         private static async Task Main(string[] args)
         {
