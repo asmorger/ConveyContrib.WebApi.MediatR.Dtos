@@ -19,7 +19,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\src\ConveyContrib.WebApi.MediatR.Dtos\ConveyContrib.WebApi.MediatR.Dtos.csproj" />
-      <ProjectReference Include="..\TestServer\TestServer.csproj" />
     </ItemGroup>
 
 </Project>

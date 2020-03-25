@@ -1,16 +1,15 @@
 using System.Threading.Tasks;
 using Alba;
+using Convey;
+using Convey.WebApi;
 using ConveyContrib.WebApi.MediatR.Dtos.Tests.Models;
-using TestServer;
+using Microsoft.AspNetCore.Hosting;
 using Xunit;
 
 namespace ConveyContrib.WebApi.MediatR.Dtos.Tests
 {
     public class HostingIntegrationTests
     {
-        private static SystemUnderTest GetSystem() =>
-            new SystemUnderTest(Program.CreateHostBuilder(new string[0]));
-
         [Fact]
         public async Task An_http_status_of_200_is_returned_when_validation_succeeds()
         {
@@ -43,5 +42,26 @@ namespace ConveyContrib.WebApi.MediatR.Dtos.Tests
                 s.ContentShouldBe("42");
             });
         }
+        
+        private static SystemUnderTest GetSystem() =>
+            SystemUnderTest.For(_ =>
+            {
+                _.ConfigureServices(services =>
+                        services
+                            .AddConvey()
+                            .AddWebApi()
+                            .AddDtos()
+                            .Build()
+                    )
+                    .Configure(app =>
+                    {
+                        app
+                            .UseDtoEndpoints(e => e
+                                .Get<TestDto, TestMessageWithResponse, int>("")
+                                .Post<TestDto, TestMessageWithResponse, int>("")
+                                .Put<TestDto, TestMessageWithResponse, int>("")
+                            );
+                    });
+            });
     }
 }
