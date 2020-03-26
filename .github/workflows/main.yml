@@ -28,7 +28,7 @@ jobs:
     - name: Test
       run: dotnet test ./src/ConveyContrib.WebApi.MediatR.Dtos.sln --configuration Release
     - name: Package
-      run: dotnet pack ./src/ConveyContrib.WebApi.MediatR/ConveyContrib.WebApi.MediatR.Dtos.csproj --configuration Release -o dist --no-build -p:PackageVersion=1.0.$BUILD_NUMBER
+      run: dotnet pack ./src/ConveyContrib.WebApi.MediatR.Dtos/ConveyContrib.WebApi.MediatR.Dtos.csproj --configuration Release -o dist --no-build -p:PackageVersion=1.0.$BUILD_NUMBER
     - name: Upload
       uses: actions/upload-artifact@master
       with:
