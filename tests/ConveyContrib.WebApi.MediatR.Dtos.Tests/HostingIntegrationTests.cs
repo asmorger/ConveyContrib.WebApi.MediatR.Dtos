@@ -57,9 +57,7 @@ namespace ConveyContrib.WebApi.MediatR.Dtos.Tests
                     {
                         app
                             .UseDtoEndpoints(e => e
-                                .Get<TestDto, TestMessageWithResponse, int>("")
                                 .Post<TestDto, TestMessageWithResponse, int>("")
-                                .Put<TestDto, TestMessageWithResponse, int>("")
                             );
                     });
             });
