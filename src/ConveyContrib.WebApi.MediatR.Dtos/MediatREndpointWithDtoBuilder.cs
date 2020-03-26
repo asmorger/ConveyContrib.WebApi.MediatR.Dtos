@@ -252,7 +252,13 @@ namespace ConveyContrib.WebApi.MediatR.Dtos
             if (HasFailedValidation(dto, context, out var failedMessages))
             {
                 context.Response.StatusCode = 422;
-                await context.Response.WriteJsonAsync(failedMessages);
+
+                var errorViewModel = new
+                {
+                    Errors = failedMessages.Select(x => x.ErrorMessage)
+                };
+                
+                await context.Response.WriteJsonAsync(errorViewModel);
                 return;
             }
 

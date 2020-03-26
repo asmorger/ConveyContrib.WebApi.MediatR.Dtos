@@ -31,6 +31,18 @@ namespace ConveyContrib.WebApi.MediatR.Dtos.Tests
                 s.StatusCodeShouldBe(422);
             });
         }
+        
+        [Fact]
+        public async Task An_error_response_is_returned_when_validation_fails()
+        {
+            using var system = GetSystem();
+            await system.Scenario(s =>
+            {
+                s.Post.Json(new TestDto {TheAnswer = -1}).ToUrl("/");
+                s.StatusCodeShouldBe(422);
+                s.ContentShouldBe("{\"errors\":[\"'The Answer' must be greater than '0'.\"]}");
+            });
+        }
 
         [Fact]
         public async Task The_expected_response_is_returned_when_validation_succeeds()
